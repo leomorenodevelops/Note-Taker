@@ -42,3 +42,8 @@ app.delete('/api/notes/id:', (req, res) => {
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, './Develop/public/index.html'));
 });
+
+// Call for notes.html
+app.get('/notes', function (req, res) {
+    res.sendFile(path.join(__dirname, './Develop/public/notes.html'));
+});
