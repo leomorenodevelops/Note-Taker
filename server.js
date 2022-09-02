@@ -38,3 +38,7 @@ app.delete('/api/notes/id:', (req, res) => {
     res.json(deleteNote);
 });
 
+// Calls HTML home page
+app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname, './Develop/public/index.html'));
+});
