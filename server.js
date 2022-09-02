@@ -28,4 +28,13 @@ app.post('/api/notes', (req, res) => {
     notes.push(newNotes);
     fs.writeFileSync('./Develop/db/db.json', JSON.stringify(notes));
     res.json(notes);
-})
+});
+
+// Used for deleting notes
+app.delete('/api/notes/id:', (req, res) => {
+    const notes = JSON.parse(fs.readFileSync('./Develop/db/db.json'));
+    const deleteNote = notes.filter((removeNote) => removeNote.id !== req.params.id);
+    fs.writeFileSync('./Develop/db/db.json', JSON.stringify(deleteNote));
+    res.json(deleteNote);
+});
+
