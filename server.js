@@ -1,3 +1,4 @@
+// Node packages
 const express = require('express');
 const fs = require('fs');
 const notes = require('./Develop/db/db.json');
@@ -18,3 +19,13 @@ app.use(express.static('public'));
 app.get('/api/notes', (req, res) => {
     res.sendFile(path.join(__dirname, '/Develop/db/db.json'));
 });
+
+// Post function to add new notes to db.json
+app.post('/api/notes', (req, res) => {
+    const notes = JSON.parse(fs.readFileSync('./Develop/db/db.json'));
+    const newNotes = req.body;
+    newNotes.id = uuid.v4();
+    notes.push(newNotes);
+    fs.writeFileSync('./Develop/db/db.json', JSON.stringify(notes));
+    res.json(notes);
+})
