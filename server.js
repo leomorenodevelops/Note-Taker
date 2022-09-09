@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3001;
 // Middleware
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
-app.use(express.static('public'));
+app.use(express.static('Develop/public'));
 
 // Setting routes for APIs
 // Notes get saved and joins them in db.json
@@ -31,7 +31,7 @@ app.post('/api/notes', (req, res) => {
 });
 
 // Used for deleting notes
-app.delete('/api/notes/id:', (req, res) => {
+app.delete('/api/notes/:id', (req, res) => {
     const notes = JSON.parse(fs.readFileSync('./Develop/db/db.json'));
     const deleteNote = notes.filter((removeNote) => removeNote.id !== req.params.id);
     fs.writeFileSync('./Develop/db/db.json', JSON.stringify(deleteNote));
